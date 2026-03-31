@@ -1,24 +1,30 @@
 import PromptSync from "prompt-sync";
+import { contact } from "./config";
 
-export function addContact() {
-    const prompt = PromptSync({ sigint: true })
+const prompt = PromptSync({ sigint: true });
 
-    let firstName : string | null = prompt("Enter first name: ")
-    let email : string | null = prompt("Enter email: ")
-    let phoneNumber : string | null = prompt("Enter phone number: ")
+function getNonEmptyInput(message: string): string {
+    let userInput: string | null = '';
+
+    do {
+        userInput = prompt(message);
+
+        if (userInput === null || userInput.trim() === "") {
+            console.error("This field cannot be empty. Please try again.");
+        }
+    } while (userInput === null || userInput.trim() === "");
+
+    return userInput.trim(); 
 }
 
-// user enters a first name
-// program checks if the user entered nothing
-// if yes, program throws a loop. If not, program proceeds
+export function addContact(): contact {
+    const firstName = getNonEmptyInput("Enter first name: ");
+    const email = getNonEmptyInput("Enter email: ");
+    const phoneNumber = getNonEmptyInput("Enter phone number: ");
 
-// user enters a email
-// program checks if the user entered nothing
-// if yes, program throws a loop. If not, program proceeds
-
-// user enters a phone number
-// program checks if the user entered nothing
-// if yes, program throws a loop. If not, program proceeds
-
-// program adds the three values together as an object
-// program returns it
+    return {
+        firstName: firstName,
+        email: email,
+        phoneNumber: phoneNumber,
+    };
+}

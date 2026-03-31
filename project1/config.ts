@@ -1,7 +1,7 @@
-export type userContact = {
+export type contact = {
     firstName: string
     email: string
-    number: number    
+    phoneNumber: string    
 }
 
 export let contacts = []

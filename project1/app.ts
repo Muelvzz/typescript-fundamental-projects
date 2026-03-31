@@ -1,6 +1,8 @@
 import { startup } from "./startup"
+import { addContact } from "./addContact";
 
 import promptSync from 'prompt-sync';
+import { contact } from "./config";
 
 function app() {
     const prompt = promptSync({ sigint: true });
@@ -21,8 +23,10 @@ function app() {
         console.log(userCommand)
     } else {
         console.error(`${rawInput} is not a valid number value`)
-        throw new Error("Invalid number entered.")
     }
+
+    let newContact: contact = addContact()
+    console.log(newContact)
 }
 
 app()
