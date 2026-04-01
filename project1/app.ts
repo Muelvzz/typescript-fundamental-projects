@@ -1,32 +1,50 @@
 import { startup } from "./startup"
 import { addContact } from "./addContact";
+import { displayContacts } from "./displayContacts";
 
 import promptSync from 'prompt-sync';
-import { contact } from "./config";
+import { contact, contacts } from "./config";
 
 function app() {
     const prompt = promptSync({ sigint: true });
 
+    let isRunning = true
+
     startup()
 
-    let rawInput: string | null = prompt("Enter a command: ");
+    do {
+        let rawInput: string | null = prompt("Enter a command: ");
 
-    // This is to verify is the user's input is not empty
-    if (rawInput === null || rawInput.trim() === "") {
-        console.error("No input provided or cancelled")
-        throw new Error("Input was null or empty")
-    }
+        // This is to verify is the user's input is not empty
+        if (rawInput === null || rawInput.trim() === "") {
+            console.error("\nNo input provided or cancelled")
+            continue
+        }
 
-    let userCommand : number = Number(rawInput) // To enforce strict data type regulation
+        switch (rawInput) {
+            case '1':
+                let newContact: contact = addContact()
+                
+                contacts.push(newContact)
+                console.log(`\n${newContact.firstName} is added to the list`)
+                break
 
-    if (!isNaN(userCommand)) {
-        console.log(userCommand)
-    } else {
-        console.error(`${rawInput} is not a valid number value`)
-    }
+            case '2':
+                displayContacts(contacts)
+                break
 
-    let newContact: contact = addContact()
-    console.log(newContact)
+            case '3':
+                console.log('\nGot it, thanks for playing.')
+                isRunning = false
+                break
+            
+            default:
+                console.error('\nPlease select from command 1-3.')
+                continue
+            }
+
+    } while (isRunning)
+
 }
 
 app()

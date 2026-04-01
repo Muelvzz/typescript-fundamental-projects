@@ -4,4 +4,4 @@ export type contact = {
     phoneNumber: string    
 }
 
-export let contacts = []
+export let contacts: contact[] = []
