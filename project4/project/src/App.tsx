@@ -1,4 +1,5 @@
 import { JSX } from "react"
+import Calculator from "./components/Calculator"
 
 function App(): JSX.Element {
 
@@ -9,7 +10,11 @@ function App(): JSX.Element {
       ">
         <h1 className="font-bold text-4xl">Project #4: Calculator</h1>
       </header>
-      <main className="min-h-screen"></main>
+      <main className="
+        min-h-screen flex justify-center items-center
+      ">
+        <Calculator />
+      </main>
       <footer className="
         flex justify-center py-4
       ">
