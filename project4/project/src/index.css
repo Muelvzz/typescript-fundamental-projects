@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: rgb(176, 234, 234);
+}
+
+body {
+    background-color: rgb(221, 243, 243);
+}
+
+footer {
+    background-color: rgb(128, 172, 172);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
