@@ -1,17 +1,28 @@
 import { JSX } from "react";
 import Button from "./Button";
+import { useState } from "react";
 
 export default function Calculator(): JSX.Element {
 
-    const keyList: string[] = ['7', '8', '9', 'DEL', 'AC', '4', '5', '6', 'X', '/', '1', '2', '3', '+', '-', '0', '.', 'x10^x', '=']
+    const [numberList, setNumberList] = useState<string>("")
+
+    const keyList: string[] = ['7', '8', '9', 'DEL', 'AC', '4', '5', '6', 'X', '/', '1', '2', '3', '+', '-', '0', '.', 'x10^x', 'Ans', '=']
 
     return (
         <section className="
-            flex flex-col gap-y-2 bg-black px-10 pb-10 pt-20 rounded-lg
+            flex flex-col gap-y-5 bg-[#0c0d0e] 
+            px-10 pb-10 pt-20 rounded-lg
         ">
             <div className="
-                bg-white text-right pb-2 pr-4 pt-10 rounded-lg
+                flex flex-col bg-white text-right pb-2 
+                pr-4 pt-2 rounded-lg gap-y-6
             ">
+                <p className="
+                    text-xs text-[#51585e]
+                ">{
+                    numberList ? numberList : 
+                    "Your input goes here..."
+                }</p>
                 <h1 className="
                     font-semibold text-4xl
                 ">Answer</h1>
@@ -22,7 +33,8 @@ export default function Calculator(): JSX.Element {
                 { keyList.map((value: string): JSX.Element => (
                     <div>
                         <Button 
-                            value={ value }
+                            placeholder={ value }
+                            setNumberList={setNumberList}
                         />
                     </div>
                 )) }
