@@ -1,12 +1,29 @@
 import { JSX } from "react";
 import Button from "./Button";
 import { useState } from "react";
+import { evaluate } from "mathjs"
 
 export default function Calculator(): JSX.Element {
 
     const [numberList, setNumberList] = useState<string>("")
+    const [result, setResult] = useState<string>("")
 
-    const keyList: string[] = ['7', '8', '9', 'DEL', 'AC', '4', '5', '6', 'X', '/', '1', '2', '3', '+', '-', '0', '.', 'x10^x', 'Ans', '=']
+    const keyList: string[] = ['7', '8', '9', 'DEL', 'AC', '4', '5', '6', '*', '/', '1', '2', '3', '+', '-', '0', '.', 'x10^x', 'Ans', '=']
+
+    const calculateInputs = (numberList: string) => {
+        const result = handleCalculate(numberList)
+        setResult(result)
+    }
+
+    const handleCalculate = (input: string) => {
+        try {
+            const result = evaluate(input)
+            return result
+        } catch (err) {
+            setNumberList("Invalid expression: Please check your syntax")
+            setResult("0")
+        }
+    }
 
     return (
         <section className="
@@ -20,12 +37,12 @@ export default function Calculator(): JSX.Element {
                 <p className="
                     text-xs text-[#51585e]
                 ">{
-                    numberList ? numberList : 
+                    numberList !== "" ? numberList : 
                     "Your input goes here..."
                 }</p>
                 <h1 className="
                     font-semibold text-4xl
-                ">Answer</h1>
+                ">{ result }</h1>
             </div>
             <div className="
                 grid grid-cols-5 gap-2
@@ -35,6 +52,8 @@ export default function Calculator(): JSX.Element {
                         <Button 
                             placeholder={ value }
                             setNumberList={setNumberList}
+                            calculateInputs={calculateInputs}
+                            numberList={numberList}
                         />
                     </div>
                 )) }

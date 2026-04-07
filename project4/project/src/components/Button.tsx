@@ -1,25 +1,26 @@
 import { JSX, Dispatch, SetStateAction } from "react";
 
-export default function Button({ placeholder, setNumberList }: 
-    { placeholder: string, setNumberList: Dispatch<SetStateAction<string>> }): JSX.Element {
+export default function Button({ placeholder, setNumberList, calculateInputs, numberList }: 
+    { placeholder: string, setNumberList: Dispatch<SetStateAction<string>>, calculateInputs: (value: string) => void, numberList: string }): JSX.Element {
 
-    const addKeys = (value: string) => { setNumberList(prev => prev + value) }
-
-    const handleKeyPress = (value: string) => {
-        if (value === "AC") { setNumberList("") }
-        else if (value === "DEL") console.log(("DEL is pressed"))
-        else if (value === "=") console.log(("= is pressed"))
-        else if (value === "x10^x") console.log(("x10^x is pressed"))
-        else if (value === "Ans") console.log(("Ans is pressed"))
-        else if (value === ".") console.log((". is pressed"))
-        else if (value === "+" || value === "-" ||
-                value === "X" || value === "/")
-                console.log(`${value} is pressed`)
-        else {
-            const intVal: number = parseInt(value)
-            console.log(`${intVal} is pressed`)
+    const commandKeys = (key: string) => {
+        switch (key) {
+            case "AC":
+                setNumberList("")
+                break
+            case "DEL":
+                setNumberList(prev => prev.slice(0, -1))
+                break
+            case "=":
+                calculateInputs(numberList)
+                break
+            case "x10^x":
+                break
+            case "Ans":
+                break
+            default:
+                setNumberList(prev => prev + key)
         }
-        addKeys(value)
     }
 
     return (
@@ -28,13 +29,13 @@ export default function Button({ placeholder, setNumberList }:
             font-bold rounded-lg cursor-pointer text-lg
             ${ placeholder === '=' ? 'bg-red-500' : "" }
             ${ placeholder === 'DEL' || placeholder === 'AC' ? 'bg-green-400' : '' } 
-            ${ placeholder === 'X' || placeholder === '/' || 
+            ${ placeholder === '*' || placeholder === '/' || 
                 placeholder === '+' || placeholder === '-' 
                 ? 'bg-amber-300' : '' } 
             hover:bg-[#17191c6f] duration-300
             `}
             key={ placeholder }
-            onClick={() => handleKeyPress(placeholder)}
+            onClick={() => commandKeys(placeholder)}
             >{ placeholder }</button>
     )
 }
