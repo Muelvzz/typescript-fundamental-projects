@@ -26,7 +26,9 @@ export default function Button({ placeholder, setNumberList, calculateInputs, nu
     return (
         <button className={`
             text-white bg-[#17191c] p-5 w-full h-full 
-            font-bold rounded-lg cursor-pointer text-lg
+            font-bold rounded-lg cursor-pointer 
+            text-xs sm:text-sm md:text-lg
+            flex items-center justify-center
             ${ placeholder === '=' ? 'bg-red-500' : "" }
             ${ placeholder === 'DEL' || placeholder === 'AC' ? 'bg-green-400' : '' } 
             ${ placeholder === '*' || placeholder === '/' || 

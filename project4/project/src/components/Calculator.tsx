@@ -28,7 +28,9 @@ export default function Calculator(): JSX.Element {
     return (
         <section className="
             flex flex-col gap-y-5 bg-[#0c0d0e] 
-            px-10 pb-10 pt-20 rounded-lg
+            px-3 sm:px-5 md:px-10 
+            pb-10 pt-15 
+            rounded-lg
         ">
             <div className="
                 flex flex-col bg-white text-right pb-2 
@@ -42,13 +44,13 @@ export default function Calculator(): JSX.Element {
                 }</p>
                 <h1 className="
                     font-semibold text-4xl
-                ">{ result }</h1>
+                ">{ result ? result : "0" }</h1>
             </div>
             <div className="
-                grid grid-cols-5 gap-2
+                grid grid-cols-5 gap-1
             ">
                 { keyList.map((value: string): JSX.Element => (
-                    <div>
+                    <div key={ value }>
                         <Button 
                             placeholder={ value }
                             setNumberList={setNumberList}

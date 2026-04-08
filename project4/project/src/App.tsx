@@ -6,9 +6,12 @@ function App(): JSX.Element {
   return (
     <>
       <header className="
-        flex justify-center py-4
+        py-4 text-center  
       ">
-        <h1 className="font-bold text-4xl">Project #4: Calculator</h1>
+        <h1 className="
+          font-bold text-2xl md:text-3xl 
+          lg:text-4xl
+        ">Project #4: Calculator</h1>
       </header>
       <main className="
         min-h-screen flex justify-center items-center
@@ -16,7 +19,7 @@ function App(): JSX.Element {
         <Calculator />
       </main>
       <footer className="
-        flex justify-center py-4
+        text-center py-4
       ">
         <p>Made by Muelvin Lopez @ 2026</p>
       </footer>
